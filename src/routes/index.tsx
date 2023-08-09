@@ -14,7 +14,7 @@ export default component$(() => {
   return (
     <div class="h-full w-full flex flex-col items-center justify-center gap-4">
       <h1 class="text-6xl italic font-bold tracking-widest">Rumi~</h1>
-      <h2 class="text-md text-zinc-700">smol rooms for smol chats</h2>
+      <h2 class="text-md text-zinc-700">smol rooms for smol discussions</h2>
 
       <div class="py-4 flex flex-col gap-4 items-center">
         <input
@@ -44,7 +44,7 @@ export const head: DocumentHead = {
   meta: [
     {
       name: "description",
-      content: "smol rooms for smol chats",
+      content: "smol rooms for smol discussions",
     },
   ],
 };
