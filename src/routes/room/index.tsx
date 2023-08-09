@@ -6,14 +6,40 @@ import {
   useNavigate,
 } from "@builder.io/qwik-city";
 import Pusher from "pusher-js";
+import PusherServer from "pusher";
 
 const pusher = new Pusher(import.meta.env.PUBLIC_PUSHER_KEY, {
   cluster: import.meta.env.PUBLIC_PUSHER_CLUSTER,
 });
 
 export const useSendMessage = routeAction$(async (data, requestEvent) => {
+  const pusherServer = new PusherServer({
+    cluster: import.meta.env.PUBLIC_PUSHER_CLUSTER,
+    key: import.meta.env.PUBLIC_PUSHER_KEY,
+    appId: requestEvent.env.get("PUSHER_APP_ID")!,
+    secret: requestEvent.env.get("PUSHER_SECRET")!,
+    useTLS: true,
+  });
+
+  const channelName = requestEvent.url.searchParams.get("id");
+  if (!channelName) {
+    return requestEvent.fail(400, {
+      errorMessage: "no channel name",
+    });
+  }
+
+  if (!data.message) {
+    return requestEvent.fail(400, {
+      errorMessage: "no message",
+    });
+  }
+
+  pusherServer.trigger(channelName, "message", {
+    message: data.message,
+  });
+
   return {
-    url: requestEvent.url,
+    pushed: true,
   };
 });
 
@@ -38,6 +64,11 @@ export default component$(() => {
 
     const subscribed = pusher.subscribe(channelName);
     subscribed.bind("message", handleMessage);
+
+    return () => {
+      subscribed.unbind("message", handleMessage);
+      pusher.unsubscribe(channelName);
+    };
   });
 
   return (
@@ -51,8 +82,7 @@ export default component$(() => {
       >
         test
         {sendMessageAction.value && (
-          // When the action is done successfully, the `action.value` property will contain the return value of the action
-          <p>User {sendMessageAction.value.url?.toJSON()} added successfully</p>
+          <p>Result: {JSON.stringify(sendMessageAction.value)}</p>
         )}
       </button>
 
