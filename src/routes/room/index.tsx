@@ -7,6 +7,7 @@ import {
 } from "@builder.io/qwik-city";
 import Pusher from "pusher-js";
 import PusherServer from "pusher";
+import { faker } from "@faker-js/faker";
 
 const pusher = new Pusher(import.meta.env.PUBLIC_PUSHER_KEY, {
   cluster: import.meta.env.PUBLIC_PUSHER_CLUSTER,
@@ -36,6 +37,7 @@ export const useSendMessage = routeAction$(async (data, requestEvent) => {
 
   pusherServer.trigger(channelName, "message", {
     message: data.message,
+    user: data.name,
   });
 
   return {
@@ -48,7 +50,7 @@ export default component$(() => {
   const navigate = useNavigate();
 
   const sendMessageAction = useSendMessage();
-  const name = useSignal("");
+  const userName = useSignal(faker.internet.userName());
 
   const handleMessage = $((message: string) => {
     console.log(message);
@@ -74,21 +76,28 @@ export default component$(() => {
 
   return (
     <div class="h-full flex flex-col gap-4 justify-between px-24 py-12">
-      {location.url.searchParams.get("id")}
+      <div class="flex items-center justify-between gap-8">
+        <div class="flex items-center gap-2">
+          <div class="font-bold underline underline-double">Room ID: </div>
+          <span class="italic">{location.url.searchParams.get("id")}</span>
+        </div>
 
-      <button
-        onClick$={() =>
-          navigate(`/room?id=${Math.random().toString(36).slice(2)}`)
-        }
-      >
-        test
-        {sendMessageAction.value && (
-          <p>Result: {JSON.stringify(sendMessageAction.value)}</p>
-        )}
-      </button>
+        <div class="flex items-center gap-2">
+          <div class="font-bold underline underline-double">UserName: </div>
+          <span class="italic">{userName}</span>
+        </div>
+      </div>
+
+      <div class="flex-1 h-full w-full bg-pink overflow-y-auto">.</div>
 
       <div class="w-full">
         <Form action={sendMessageAction} class="flex items-center gap-4">
+          <input
+            class="hidden"
+            type="text"
+            name="name"
+            value={userName.value}
+          />
           <input
             name="message"
             class="flex-1 bg-black border-12 py-2 px-4 placeholder:(text-slate-600) border-double"
