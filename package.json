@@ -35,5 +35,8 @@
     "unocss": "^0.54.3",
     "vite": "4.4.0",
     "vite-tsconfig-paths": "4.2.0"
+  },
+  "dependencies": {
+    "pusher": "^5.1.3"
   }
 }
