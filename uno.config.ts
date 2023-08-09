@@ -29,8 +29,9 @@ export default defineConfig({
           weights: new Array(9).fill(0).map((_, i) => i * 100 + 100),
         },
         mono: {
-          name: "JetBrains Mono",
+          name: "Victor Mono",
           weights: new Array(9).fill(0).map((_, i) => i * 100 + 100),
+          italic: true,
         },
       },
     }),
