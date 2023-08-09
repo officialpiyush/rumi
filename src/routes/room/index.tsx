@@ -1,4 +1,4 @@
-import { $, component$, useVisibleTask$ } from "@builder.io/qwik";
+import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import {
   Form,
   routeAction$,
@@ -48,6 +48,7 @@ export default component$(() => {
   const navigate = useNavigate();
 
   const sendMessageAction = useSendMessage();
+  const name = useSignal("");
 
   const handleMessage = $((message: string) => {
     console.log(message);
