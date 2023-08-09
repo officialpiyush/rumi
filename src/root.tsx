@@ -5,6 +5,7 @@ import {
   ServiceWorkerRegister,
 } from "@builder.io/qwik-city";
 
+import "@unocss/reset/tailwind.css";
 import "uno.css";
 import "./global.css";
 
