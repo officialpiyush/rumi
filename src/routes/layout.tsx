@@ -8,9 +8,10 @@ export default component$(() => {
         <Slot />
       </main>
 
-      <footer class="flex justify-end text-xs text-zinc-500 py-2">
-        <Link class="underline" href="https://pycz.dev">
-          <div>Piyush</div>
+      <footer class="flex justify-center text-md text-zinc-500 pb-2 pt-1">
+        Rumi~ with ❤️ by
+        <Link class="underline pl-2" href="https://pycz.dev">
+          Piyush
         </Link>
       </footer>
     </div>
