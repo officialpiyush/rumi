@@ -1,6 +1,7 @@
 import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import {
   Form,
+  Link,
   routeAction$,
   useLocation,
   useNavigate,
@@ -102,9 +103,14 @@ export default component$(() => {
           <span class="italic">{location.url.searchParams.get("id")}</span>
         </div>
 
+        <Link href="/" class="text-teal italic underline flex items-center gap-1 text-lg">
+          <div class="i-material-symbols-arrow-back"></div>
+          Home
+        </Link>
+
         <div class="flex items-center gap-2">
           <div class="font-bold underline underline-double">UserName: </div>
-          <span class="italic">{userName}</span>
+          <span class="italic">{userName}</span>L
         </div>
       </div>
 
