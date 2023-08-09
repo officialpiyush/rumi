@@ -8,10 +8,20 @@ import {
 import Pusher from "pusher-js";
 import PusherServer from "pusher";
 import { faker } from "@faker-js/faker";
+import { P, match } from "ts-pattern";
+import linkifyHtml from "linkify-html";
+import DomPurify from "dompurify";
+import { nanoid } from "nanoid";
 
 const pusher = new Pusher(import.meta.env.PUBLIC_PUSHER_KEY, {
   cluster: import.meta.env.PUBLIC_PUSHER_CLUSTER,
 });
+
+interface MessageData {
+  id: string;
+  message: string;
+  username: string;
+}
 
 export const useSendMessage = routeAction$(async (data, requestEvent) => {
   const pusherServer = new PusherServer({
@@ -36,8 +46,9 @@ export const useSendMessage = routeAction$(async (data, requestEvent) => {
   }
 
   pusherServer.trigger(channelName, "message", {
+    id: nanoid(),
     message: data.message,
-    user: data.name,
+    username: data.name,
   });
 
   return {
@@ -51,9 +62,18 @@ export default component$(() => {
 
   const sendMessageAction = useSendMessage();
   const userName = useSignal(faker.internet.userName());
+  const messages = useSignal<MessageData[]>([]);
 
-  const handleMessage = $((message: string) => {
-    console.log(message);
+  const handleMessage = $((data: MessageData) => {
+    data.message = DomPurify.sanitize(
+      linkifyHtml(data.message, {
+        target: "_blank",
+        rel: "noopener noreferrer",
+        className: "underline underline-double text-teal italic",
+      })
+    );
+
+    messages.value = [...messages.value, data];
   });
 
   useVisibleTask$(({ track }) => {
@@ -88,7 +108,24 @@ export default component$(() => {
         </div>
       </div>
 
-      <div class="flex-1 h-full w-full bg-pink overflow-y-auto">.</div>
+      <div class="flex-1 flex flex-col justify-end h-full w-full border-12 border-double overflow-y-auto px-4 py-4">
+        {match(messages)
+          .with({ value: [] }, () => (
+            <div class="text-lg text-zinc-5 lowercase"> start messaging! </div>
+          ))
+          .with({ value: P.select() }, (m) =>
+            m.map((message) => (
+              <div key={message.id} class="flex gap-2">
+                <span class="font-bold underline underline-double italic">
+                  {message.username}:
+                </span>
+
+                <p dangerouslySetInnerHTML={message.message}></p>
+              </div>
+            ))
+          )
+          .exhaustive()}
+      </div>
 
       <div class="w-full">
         <Form action={sendMessageAction} class="flex items-center gap-4">

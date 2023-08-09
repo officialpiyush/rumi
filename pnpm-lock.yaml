@@ -8,6 +8,12 @@ dependencies:
   '@faker-js/faker':
     specifier: ^8.0.2
     version: 8.0.2
+  dompurify:
+    specifier: ^3.0.5
+    version: 3.0.5
+  linkify-html:
+    specifier: ^4.1.1
+    version: 4.1.1(linkifyjs@4.1.1)
   nanoid:
     specifier: ^4.0.2
     version: 4.0.2
@@ -17,6 +23,9 @@ dependencies:
   pusher-js:
     specifier: ^8.3.0
     version: 8.3.0
+  ts-pattern:
+    specifier: ^5.0.5
+    version: 5.0.5
 
 devDependencies:
   '@builder.io/qwik':
@@ -25,6 +34,9 @@ devDependencies:
   '@builder.io/qwik-city':
     specifier: ^1.2.6
     version: 1.2.6
+  '@types/dompurify':
+    specifier: ^3.0.2
+    version: 3.0.2
   '@types/eslint':
     specifier: 8.40.2
     version: 8.40.2
@@ -505,6 +517,12 @@ packages:
       '@types/ms': 0.7.31
     dev: true
 
+  /@types/dompurify@3.0.2:
+    resolution: {integrity: sha512-YBL4ziFebbbfQfH5mlC+QTJsvh0oJUrWbmxKMyEdL7emlHJqGR2Qb34TEFKj+VCayBvjKy3xczMFNhugThUsfQ==}
+    dependencies:
+      '@types/trusted-types': 2.0.3
+    dev: true
+
   /@types/eslint@8.40.2:
     resolution: {integrity: sha512-PRVjQ4Eh9z9pmmtaq8nTjZjQwKFk7YIHIud3lRoKRBgUQjgjRmoGxxGEPXQkF+lH7QkHJRNr5F4aBgYCW0lqpQ==}
     dependencies:
@@ -558,6 +576,10 @@ packages:
 
   /@types/semver@7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
+    dev: true
+
+  /@types/trusted-types@2.0.3:
+    resolution: {integrity: sha512-NfQ4gyz38SL8sDNrSixxU2Os1a5xcdFxipAFxYEuLUlvU2uDwS4NUpsImcf1//SlWItCVMMLiylsxbmNMToV/g==}
     dev: true
 
   /@types/unist@2.0.7:
@@ -1329,6 +1351,10 @@ packages:
     dependencies:
       domelementtype: 2.3.0
     dev: true
+
+  /dompurify@3.0.5:
+    resolution: {integrity: sha512-F9e6wPGtY+8KNMRAVfxeCOHU0/NPWMSENNq4pQctuXRqqdEPW7q3CrLbR5Nse044WwacyjHGOMlvNsBe1y6z9A==}
+    dev: false
 
   /domutils@3.1.0:
     resolution: {integrity: sha512-H78uMmQtI2AhgDJjWeQmHwJJ2bLPD3GMmO7Zja/ZZh84wkm+4ut+IUnUdRa8uCGX88DiVx1j6FRe1XfxEgjEZA==}
@@ -2210,6 +2236,18 @@ packages:
       prelude-ls: 1.2.1
       type-check: 0.4.0
     dev: true
+
+  /linkify-html@4.1.1(linkifyjs@4.1.1):
+    resolution: {integrity: sha512-7RcF7gIhEOGBBvs7orCJ2tevaz7iF0ZLZSRPWNNBOnW/uGjOOQYB+ztSeHF6dchMC2dM9H8zZlt6Z959bjteaw==}
+    peerDependencies:
+      linkifyjs: ^4.0.0
+    dependencies:
+      linkifyjs: 4.1.1
+    dev: false
+
+  /linkifyjs@4.1.1:
+    resolution: {integrity: sha512-zFN/CTVmbcVef+WaDXT63dNzzkfRBKT1j464NJQkV7iSgJU0sLBus9W0HBwnXK13/hf168pbrx/V/bjEHOXNHA==}
+    dev: false
 
   /local-pkg@0.4.3:
     resolution: {integrity: sha512-SFppqq5p42fe2qcZQqqEOiVRXl+WCP1MdT6k7BDEW1j++sp5fIY+/fdRQitvKgB5BrBcmrs5m/L0v2FrU5MY1g==}
@@ -3394,6 +3432,10 @@ packages:
   /trough@2.1.0:
     resolution: {integrity: sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==}
     dev: true
+
+  /ts-pattern@5.0.5:
+    resolution: {integrity: sha512-tL0w8U/pgaacOmkb9fRlYzWEUDCfVjjv9dD4wHTgZ61MjhuMt46VNWTG747NqW6vRzoWIKABVhFSOJ82FvXrfA==}
+    dev: false
 
   /tsconfck@2.1.2(typescript@5.1.6):
     resolution: {integrity: sha512-ghqN1b0puy3MhhviwO2kGF8SeMDNhEbnKxjK7h6+fvY9JAxqvXi8y5NAHSQv687OVboS2uZIByzGd45/YxrRHg==}
