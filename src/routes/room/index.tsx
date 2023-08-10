@@ -6,17 +6,13 @@ import {
   useLocation,
   useNavigate,
 } from "@builder.io/qwik-city";
-import Pusher from "pusher-js";
-import PusherServer from "pusher";
 import { faker } from "@faker-js/faker";
-import { P, match } from "ts-pattern";
-import linkifyHtml from "linkify-html";
 import DomPurify from "dompurify";
+import linkifyHtml from "linkify-html";
 import { nanoid } from "nanoid";
-
-const pusher = new Pusher(import.meta.env.PUBLIC_PUSHER_KEY, {
-  cluster: import.meta.env.PUBLIC_PUSHER_CLUSTER,
-});
+import PusherServer from "pusher";
+import Pusher from "pusher-js";
+import { P, match } from "ts-pattern";
 
 interface MessageData {
   id: string;
@@ -77,8 +73,12 @@ export default component$(() => {
     messages.value = [...messages.value, data];
   });
 
-  useVisibleTask$(({ track }) => {
+  useVisibleTask$(async ({ track }) => {
     track(() => location.url.searchParams);
+
+    const pusher = new Pusher(import.meta.env.PUBLIC_PUSHER_KEY, {
+      cluster: import.meta.env.PUBLIC_PUSHER_CLUSTER,
+    });
 
     const channelName = location.url.searchParams.get("id");
     if (!channelName) {
@@ -103,7 +103,10 @@ export default component$(() => {
           <span class="italic">{location.url.searchParams.get("id")}</span>
         </div>
 
-        <Link href="/" class="text-teal italic underline flex items-center gap-1 text-lg">
+        <Link
+          href="/"
+          class="text-teal italic underline flex items-center gap-1 text-lg"
+        >
           <div class="i-material-symbols-arrow-back"></div>
           Home
         </Link>
