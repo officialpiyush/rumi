@@ -7,3 +7,11 @@
 The idea was pretty simple, during college practical labs, me and my friends like to play [TypeRacer](https://play.typeracer.com/), and the custom room links are too big to type and everyone makes a typo atleast once :(
 
 The idea here is simple, Join a room -> send the link -> click on the link -> boom, enjoy
+
+# Screenshots
+
+### Landing Page:
+![Landing Page](./.github/static/landing.png)
+
+### Room:
+![Room](./.github/static/room.png)
