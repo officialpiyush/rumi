@@ -14,8 +14,6 @@ import PusherServer from "pusher";
 import Pusher from "pusher-js";
 import { P, match } from "ts-pattern";
 
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
-
 interface MessageData {
   id: string;
   message: string;
