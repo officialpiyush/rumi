@@ -1,0 +1,20 @@
+diff --git a/lib/requests.js b/lib/requests.js
+index b101e6db165247e17820b310fb68ab1b974deead..3325beda6964174ec190b3c204e79c7725fa647e 100644
+--- a/lib/requests.js
++++ b/lib/requests.js
+@@ -1,7 +1,13 @@
+ // Redundant default as a workaround for this WebPack bug:
+ // https://github.com/webpack/webpack/issues/4742
+-const fetch = require("node-fetch").default
+-const AbortController = require("abort-controller").default
++
++console.log("lib/requests.js")
++
++const fetch = require("node-fetch")
++const AbortController = require("abort-controller")
++
++console.log("fetch", fetch)
++console.log("AbortController", AbortController)
+ 
+ const errors = require("./errors")
+ const util = require("./util")

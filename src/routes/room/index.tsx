@@ -14,6 +14,8 @@ import PusherServer from "pusher";
 import Pusher from "pusher-js";
 import { P, match } from "ts-pattern";
 
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
+
 interface MessageData {
   id: string;
   message: string;
@@ -42,7 +44,7 @@ export const useSendMessage = routeAction$(async (data, requestEvent) => {
     });
   }
 
-  pusherServer.trigger(channelName, "message", {
+  await pusherServer.trigger(channelName, "message", {
     id: nanoid(),
     message: data.message,
     username: data.name,
@@ -91,7 +93,7 @@ export default component$(() => {
 
     return () => {
       subscribed.unbind("message", handleMessage);
-      pusher.unsubscribe(channelName);
+      pusher.disconnect();
     };
   });
 

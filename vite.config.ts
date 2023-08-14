@@ -17,6 +17,7 @@ export default defineConfig(() => {
       }
     })],
     optimizeDeps: {
+      include: ["pusher", "abort-controller"]
     },
     build: {
       rollupOptions: {
